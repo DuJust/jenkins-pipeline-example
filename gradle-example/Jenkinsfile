@@ -1,0 +1,15 @@
+pipeline {
+  agent {
+    docker {
+      image "gradle:3.5-jdk8-alpine"
+      args '-u root:root -v $HOME/.gradle:/root/.gradle'
+    }
+  }
+  stages {
+    stage("Build") {
+      steps {
+        sh "gradle clean build -x test"
+      }
+    }
+  }
+}
